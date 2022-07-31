@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;400;700&family=Quicksand:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <title>Document</title>
+    <style>
+        :root {
+            --pink-button: #DA1C96;
+            --text-input-field: #D9D9D9;
+            --check: #80B86D;
+            --equis: #BF4580;
+            --white: #ffffff;
+            --black: #000000;
+            --sm: 16px;
+            --md: 20px;
+            --lg: 24px;
+            --url-check: "https://www.figma.com/file/Jdl8GqfrUFj2zl6mX9PP7U/Untitled?node-id=3%3A8";
+            --url-uncheck: "https://www.figma.com/file/Jdl8GqfrUFj2zl6mX9PP7U/Untitled?node-id=3%3A23";
+        }
+        body {
+            font-family: 'Quicksand', sans-serif !important;
+            margin: 0;
+        }
+        .verificacion {
+            width: 100%;
+            height: 100vh;
+            display: grid;
+            place-items: center;
+        }
+        .container {
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            width: 275px;
+        }
+        .upb {
+            width: 275px;
+            height: 91px;
+            justify-self: center;
+            margin-bottom: 60px;
+        }
+        .titulo {
+            font-size: var(--lg);
+            color: var(--black);
+            margin-bottom: 85px;
+            margin-top: 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        .formulario {
+            display: flex;
+            flex-direction: column;
+        }
+        .label {
+            font-size: var(--md);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .input {
+            background-color: var(--text-input-field);
+            border: none;
+            border-radius: 12px;
+            height: 22px;
+            font-size: var(--sm);
+            padding: 8px;
+            margin-bottom: 188px;
+        }
+        .button {
+            background-color: var(--pink-button);
+            border-radius: 18px;
+            border: none;
+            color: var(--white);
+            width: 205px;
+            cursor: pointer;
+            font-size: var(--md);
+            font-weight: bold;
+            height: 53px;
+            justify-self: center;
+        }
+        .button:hover {
+            border: 3px;
+            border-radius: 18px;
+            background-color: var(--white);
+            border-color: var(--pink-button);
+            color: var(--pink-button);
+        }
+        .boton {
+            display: grid;
+            align-items: center;
+            width: 100%;
+        }
+        /* ------------------------------pop up */
+        .modal {
+            width: 295px;
+            height: 225px;
+            background-color: #D9D9D9;
+            border-radius: 24px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            position: fixed;
+            align-self: center;
+        }
+        .pop-p {
+            font-size: var(--md);
+            color: var(--black);
+            margin-bottom: 20px;
+            margin-top: 0px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .icon {
+            width: 95px;
+            height: 95px;
+        }
+        .equis-small {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 15px;
+        }
+        .icon-small {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            margin-bottom: 0;
+            width: 35px;
+            height: 35px;
+            justify-self: right;
+        }
+        .pop-under {
+            font-size: var(--sm);
+            color: var(--black);
+            margin-bottom: 20px;
+            margin-top: 12px;
+            text-align: center;
+            opacity: 0.6;
+        }
+        .show {
+            opacity: 1;
+            display: flex;
+        }
+        .unshow{
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="verificacion" id="pantalla">
+        <div class="container" id="container">
+            <img src="./recortada.png" alt="" class="upb">
+            <p class="titulo">
+                Sistema de Verificacion para el almuerzo
+            </p>
+            <form action="" class="formulario">
+                <div class="modal" id="modal">
+                    <div class="equis-small">
+                        <p class="pop-p" id="mensaje-principal">No se ha podido verificar</p>
+                        <img src="./x.png" class="icon-small" id="x-small" alt="">
+                    </div>
+                    <img src="./x.png" class="icon" id="icon" alt="">
+                    <p class="pop-under" id="pop-under">Comuniquese con los organizadores</p>
+                </div>
+                <label for="id" class="label">ingrese su id:</label>
+                <input type="text" id="id" class="input" autocomplete="off" placeholder="382070">
+                <div class="boton">
+                    <input type="button" class="button" value="Verificar" id="verificar">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    const equis = document.getElementById("x-small")
+    equis.addEventListener("click", () => {
+        modal.classList.remove("show")
+        document.getElementById("id").value=""
+        var mensaje = document.getElementById("mensaje-principal")
+        mensaje.textContent="No se ha podido verificar "
+        document.getElementById("icon").src="./x.png"
+        var pop_under =document.getElementById("pop-under")
+        pop_under.classList.remove("unshow")
+    })
+</script>
+<script>
+    var lista = {
+        382070: "kevin quintana",
+        398848: "eveline quintana",
+        549596: "dayan devinson"
+    }
+    function revisar(id) {
+        for (var elemento in lista) {
+            if (id == elemento) {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+    }
+    const open = document.getElementById("verificar")
+    const modal = document.getElementById("modal")
+    open.addEventListener("click", () => {
+        var index = revisar(parseInt(document.getElementById("id").value))
+        if(index==true){
+            var mensaje = document.getElementById("mensaje-principal")
+            mensaje.textContent="Hola " + lista[document.getElementById("id").value]
+            document.getElementById("icon").src="./check.png"
+            var pop_under =document.getElementById("pop-under")
+            pop_under.classList.add("unshow")
+        }
+        modal.classList.add("show")
+        index=""
+    })
+</script>
+</html>
