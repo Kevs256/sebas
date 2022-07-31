@@ -186,7 +186,7 @@
         modal.classList.remove("show")
         document.getElementById("id").value=""
         var mensaje = document.getElementById("mensaje-principal")
-        mensaje.textContent="No se ha podido verificar "
+        mensaje.textContent="No se ha podido verificar"
         document.getElementById("icon").src="./x.png"
         var pop_under =document.getElementById("pop-under")
         pop_under.classList.remove("unshow")
@@ -203,10 +203,8 @@
             if (id == elemento) {
                 return true
             }
-            else {
-                return false
-            }
         }
+        return false
     }
     const open = document.getElementById("verificar")
     const modal = document.getElementById("modal")
